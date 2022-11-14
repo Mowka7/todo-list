@@ -8,7 +8,7 @@ from .views import (
     TagsCreateView,
     TagsUpdateView,
     TagsDeleteView,
-    progress_changing
+    progress_changing,
 )
 
 urlpatterns = [
