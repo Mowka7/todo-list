@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Tags</h2>
+  <h2>
+    Tags
+    <a href="{% url 'todo:tags-create' %}">Add</a>
+  </h2>
   {% if tags_list %}
     <table>
       <tr>
@@ -16,8 +19,8 @@
       {% for tag in tags_list %}
         <tr>
           <th>{{ tag.name }}</th>
-          <th>Update</th>
-          <th>Delete</th>
+          <th><a href="{% url 'todo:tags-update' pk=tag.pk %}">Update</a></th>
+          <th><a href="{% url 'todo:tags-delete' pk=tag.pk %}">Delete</a></th>
         </tr>
       {% endfor %}
     </table>
