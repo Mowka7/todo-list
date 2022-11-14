@@ -6,32 +6,30 @@
 {% block content %}
   <h1>
     TODO list
-    <a href="{% url 'todo:task-create' %}">Add task</a>
+    <a href="{% url 'todo:task-create' %}" class="btn btn-primary mr-4" style="float: right">Add task</a>
   </h1>
-  {% for task in task_list %}
-    <ul>
-      <li>{{ task.content }}
-         {% if task.progress %}
-           Done
-           <a href="{% url 'todo:change-progress' pk=task.pk %}">Undo</a>
-         {% else %}
-           Not done
-           <a href="{% url 'todo:change-progress' pk=task.pk %}">Complete</a>
-         {% endif %}
-      </li>
-      <li>{{ task.datetime }}</li>
-      <li>
+  <ul class="list-group list-group-flush">
+    {% for task in task_list %}
+      <li class="list-group-item">
+        <h4>{{ task.content }}
+           {% if task.progress %}
+             <mark class="text-success">Done</mark>
+             <a href="{% url 'todo:change-progress' pk=task.pk %}" class="btn btn-secondary" style="float: right">Undo</a>
+           {% else %}
+             <mark class="text-danger">Not done</mark>
+             <a href="{% url 'todo:change-progress' pk=task.pk %}" class="btn btn-success" style="float: right">Complete</a>
+           {% endif %}
+        </h4>
+        <p><strong>Created at:</strong> {{ task.datetime }}</p>
         Tags:
-        {% for tag in task.tags.all %}
-          {{ tag.name }}
-        {% empty %}Unknown{% endfor %}
-      </li>
-      <li>
+          {% for tag in task.tags.all %}
+            {{ tag.name }}
+          {% empty %}Unknown{% endfor %}
         <a href="{% url 'todo:task-update' pk=task.pk %}">Update</a>
         <a href="{% url 'todo:task-delete' pk=task.pk %}">Delete</a>
       </li>
-    </ul>
-  {% empty %}
-    <h3>No tasks yet!</h3>
-  {% endfor %}
+    {% empty %}
+      <h3>No tasks yet!</h3>
+    {% endfor %}
+  </ul>
 {% endblock %}

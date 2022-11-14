@@ -5,7 +5,7 @@
   <form action="" method="post">
     {% csrf_token %}
 
-    <input type="submit" value="Yes">
-    <a href="{% url 'todo:task-list' %}">No</a>
+    <input type="submit" value="Yes" class="btn btn-danger">
+    <a href="{% url 'todo:task-list' %}" class="btn btn-secondary">No</a>
   </form>
 {% endblock %}
